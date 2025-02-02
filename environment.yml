@@ -1,0 +1,18 @@
+name: name_seq
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - conda-forge::biopython
+  - samtools==1.6=hb116620_7
+  - bbmap
+  - numpy
+  - igvtools
+  - pytables
+  - tables
+  - seqkit
+  - pysam
+  - h5py
+prefix: /home/u8411596/miniconda3/envs/name_seq
