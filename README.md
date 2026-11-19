@@ -72,6 +72,6 @@ This workflow was adapted from the original NAME-seq computational pipeline:
 
 https://github.com/TaoLabBCM/NAME-seq
 
-## Author
+## Contributors
 
-Yi-Shan Lan, Dr. Ao-Lin Hsu
+Yi-Shan Lan, Dr. Chung-Yi Liang, Dr. Ao-Lin Hsu
