@@ -1,37 +1,73 @@
-# Gene Motif Analysis
+# Genome-wide NAME-seq Analysis Pipeline for 6mA Profiling in Caenorhabditis elegans
 
-This project analyzes gene promoter regions and classifies motifs based on their length. It processes CSV files containing motif data and outputs aggregated results.
+This repository provides a revised computational workflow for genome-wide DNA N6-methyladenine (6mA) analysis in *Caenorhabditis elegans*.
 
-## 📂 Project Structure
-```
-project_root/
-│── data/                          # Contains input CSV files
-│   ├── promoter_gene_ranges_within_2000_genes_lab_new.csv
-│   ├── promoter_gene_ranges_within_2000_genes_random.csv
-│── src/                           # Contains Python scripts
-│   ├── finder_list.py              # Main script for processing data
-│── results/                        # Stores processed output
-│── README.md                       # Project documentation
-│── environment.yml               # Dependencies
-│── .gitignore                      # Ignore unnecessary files
-```
+The code is provided to support the reproducibility of the genome-wide 6mA analyses presented in the study.
 
-## 📦 Installation
+## Reference genome
 
-Ensure you have Python installed. Install required dependencies:
+The *Caenorhabditis elegans* reference genome (WBcel235, NCBI RefSeq accession GCF_000002985.6) can be downloaded from:
+
+https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000002985.6/
+
+Download the genomic FASTA file, rename it to `GCF.fasta`, and place it in the `reference_genome/` directory before running the workflow.
+
+## Usage
+
+Run the following commands from the project directory.
+
+**1. Build the Bowtie2 reference index**
+
 ```bash
-conda env create -f environment.yml
+python3 NAME-seq.py index \
+  --index_name=GCF_full \
+  --input_fasta=reference_genome/GCF.fasta
 ```
 
-## 🚀 Usage
+**2. NAME-seq analysis — Mated HSB1**
 
-To process a CSV file, run:
 ```bash
-python Project_root/finder_list.py data/input.csv results/output.csv
+python3 NAME-seq.py quant \
+  --index=GCF_full \
+  --input_fasta=reference_genome/GCF.fasta \
+  --outpath=output \
+  --num_threads=8 \
+  --date=713_mated_HSB1 \
+  demo_data/mated_hsb_1_NAME/mated_hsb_1_NAME_CKDL250017079-1A_22V2TYLT4_L8_1.fq.gz \
+  demo_data/mated_hsb_1_NAME/mated_hsb_1_NAME_CKDL250017079-1A_22V2TYLT4_L8_2.fq.gz
 ```
 
-## 📊 Expected Output
-The script processes motif data and outputs an aggregated CSV file containing summed nucleotide counts (A, T, C, G).
+**3. NAME-seq analysis — Unmated HSB1**
 
-## 📝 Author
+```bash
+python3 NAME-seq.py quant \
+  --index=GCF_full \
+  --input_fasta=reference_genome/GCF.fasta \
+  --outpath=output \
+  --num_threads=8 \
+  --date=713_HSB1 \
+  demo_data/hsb_1_NAME/hsb_1_NAME_S1_L008_R1_001.fastq.gz \
+  demo_data/hsb_1_NAME/hsb_1_NAME_S1_L008_R2_001.fastq.gz
+```
+
+Replace the example FASTQ paths with the locations of your own sequencing files. The workflow requires paired-end FASTQ files and the corresponding reference genome.
+
+## Data availability
+
+Raw FASTQ files and processed data have been deposited in NCBI GEO under accession number GSE354517.
+
+https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE354517
+
+## Code availability
+
+Zenodo DOI: https://doi.org/10.5281/zenodo.24075556
+
+## Acknowledgments
+
+This workflow was adapted from the original NAME-seq computational pipeline:
+
+https://github.com/TaoLabBCM/NAME-seq
+
+## Author
+
 Yi-Shan Lan
