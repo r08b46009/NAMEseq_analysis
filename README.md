@@ -74,4 +74,4 @@ https://github.com/TaoLabBCM/NAME-seq
 
 ## Author
 
-Yi-Shan Lan
+Yi-Shan Lan, Ao-Lin Hsu
