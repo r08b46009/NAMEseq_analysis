@@ -1,5 +1,9 @@
 # Genome-wide NAME-seq Analysis Pipeline for 6mA Profiling in Caenorhabditis elegans
 
+<p align="center">
+  <img src="./gif/NAMEseq_workflow.gif" width="550" alt="NAME-seq experimental workflow">
+</p>
+
 This repository provides a revised computational workflow for genome-wide DNA N6-methyladenine (6mA) analysis in *Caenorhabditis elegans*.
 
 The code is provided to support the reproducibility of the genome-wide 6mA analyses presented in the study.
